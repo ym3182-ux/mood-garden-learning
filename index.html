@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mood Garden — Learn to Grow</title>
+  <meta name="description" content="Care for a feeling plant and learn what it needs to grow." />
+  <link rel="stylesheet" href="styles.css?v=8" />
+</head>
+<body>
+  <main class="app" id="app" data-mood="curious" data-plant="sunflower" data-stage="0">
+    <header class="topbar">
+      <div><p class="kicker">LEARN BY CARING</p><h1>Mood Garden</h1></div>
+      <div class="hud" aria-label="Garden status">
+        <div><span>DAY</span><strong id="dayLabel">1 / 6</strong></div>
+        <div><span>HEALTH</span><strong id="healthLabel">80</strong></div>
+        <div class="mood-chip"><span>FEELING</span><strong id="moodLabel">CURIOUS</strong></div>
+      </div>
+    </header>
+
+    <section class="workspace">
+      <div class="garden" id="garden" aria-label="Interactive learning garden">
+        <div class="sky-effects" aria-hidden="true">
+          <span class="sun"></span><span class="moon">☾</span>
+          <span class="rain r1"></span><span class="rain r2"></span><span class="rain r3"></span>
+          <span class="rain r4"></span><span class="rain r5"></span><span class="rain r6"></span>
+          <span class="music-note n1">♪</span><span class="music-note n2">♫</span><span class="music-note n3">♪</span>
+          <span class="spark s1">✦</span><span class="spark s2">✦</span><span class="spark s3">✦</span>
+        </div>
+
+        <div class="plant-toolbar" aria-label="Choose a plant">
+          <button class="plant-option selected" data-plant-choice="sunflower" aria-label="Grow Sunny the sunflower"><b>🌻</b><span>Sunny</span></button>
+          <button class="plant-option" data-plant-choice="fern" aria-label="Grow Fernie the fern"><b>🌿</b><span>Fernie</span></button>
+          <button class="plant-option" data-plant-choice="cactus" aria-label="Grow Pico the cactus"><b>🌵</b><span>Pico</span></button>
+          <button id="resetButton" class="new-seed-button" aria-label="Start with a new seed">↻</button>
+        </div>
+
+        <div class="message-card" aria-live="polite">
+          <div class="speaker-row"><span id="plantEmoji">🌻</span><p id="speakerName">SUNNY</p></div>
+          <blockquote id="gardenMessage">What do I need today?</blockquote>
+          <small id="careClue">☀ Bright · 💧 Damp</small>
+        </div>
+
+        <section class="learning-card" id="learningCard" hidden aria-live="polite">
+          <div><span>WHY?</span><strong id="resultTitle">Great care!</strong></div>
+          <p id="resultExplanation">Right light and water help me grow.</p>
+          <button id="retryButton" class="retry-button" hidden>↻ Try again</button>
+        </section>
+
+        <div class="mission-card" id="missionCard" aria-live="polite">
+          <span>TODAY</span>
+          <em id="weatherLabel">☁ Cloudy</em>
+          <strong id="missionTitle">☀ + 💧 Care for me</strong>
+          <small id="missionProgress">Adjust light and water</small>
+        </div>
+
+        <section class="report-card" id="reportCard" hidden aria-live="polite">
+          <span class="report-kicker">GROWTH REPORT</span>
+          <div class="report-plant" id="reportPlant">🌻</div>
+          <h2 id="reportTitle">Sunny grew in 6 days!</h2>
+          <div class="report-needs"><span id="reportLight">☀ Bright light</span><span id="reportWater">💧 Damp soil</span></div>
+          <p class="report-path" id="reportPath">🌰 → 🌱 → 🌻</p>
+          <strong class="report-badge" id="reportBadge">Sunflower Helper</strong>
+          <button id="growAgainButton">Grow another seed</button>
+        </section>
+
+        <div class="plant-shell" aria-hidden="true">
+          <div class="plant-wrap" id="plant">
+            <div class="seed-form growth-form"><span class="seed-shine"></span><span class="eye left"></span><span class="eye right"></span><span class="mouth"></span></div>
+            <div class="seedling-form growth-form"><span class="sprout-stem"></span><span class="sprout-leaf sprout-left"></span><span class="sprout-leaf sprout-right"></span><span class="sprout-head"><span class="eye left"></span><span class="eye right"></span><span class="mouth"></span></span></div>
+            <div class="mature-form">
+              <div class="flower"><span class="petal p1"></span><span class="petal p2"></span><span class="petal p3"></span><span class="petal p4"></span><span class="petal p5"></span><span class="petal p6"></span><span class="flower-center"></span></div>
+              <div class="stem"></div><div class="leaf leaf-left"></div><div class="leaf leaf-right"></div>
+              <div class="fern-crown"><i></i><i></i><i></i><i></i><i></i></div>
+              <div class="cactus-body"><i class="arm-left"></i><i class="arm-right"></i></div>
+              <div class="face"><span class="eye left"></span><span class="eye right"></span><span class="mouth"></span></div>
+            </div>
+            <div class="pot"><span class="pot-rim"></span><span class="pot-mark" id="potMark">SUN</span></div>
+            <div class="shadow"></div>
+          </div>
+        </div>
+
+        <div class="care-dock care-dock-left" aria-label="Sunlight controls">
+          <span class="dock-title">☀ LIGHT</span>
+          <button id="sunDownButton" class="round-care-button" aria-label="Give less sunlight">−</button>
+          <output id="lightValue">70%</output>
+          <button id="sunUpButton" class="round-care-button sunny" aria-label="Give more sunlight">＋</button>
+        </div>
+
+        <div class="care-dock care-dock-right" aria-label="Moisture and day controls">
+          <span class="dock-title">💧 WATER</span>
+          <div class="moisture-controls">
+            <button id="waterDownButton" class="round-care-button water-down" aria-label="Give less water">−</button>
+            <output id="waterValue">45%</output>
+            <button id="waterButton" class="round-care-button water-plus" aria-label="Give more water">＋</button>
+          </div>
+          <button id="nextDayButton" class="icon-care-button next-day-button" aria-label="Check today's care" disabled><b id="nextDayIcon">🔒</b><span id="nextDayText">Do today’s task</span></button>
+        </div>
+
+        <fieldset class="sound-dock">
+          <legend class="sr-only">Garden sound</legend>
+          <label title="Quiet"><input type="radio" name="music" value="silence" checked /><span>◌</span></label>
+          <label title="Calm"><input type="radio" name="music" value="calm" /><span>≈</span></label>
+          <label title="Upbeat"><input type="radio" name="music" value="upbeat" /><span>♫</span></label>
+        </fieldset>
+
+        <div class="stage-card">
+          <div class="stage-heading"><span id="stageEmoji">🌰</span><strong id="stageName">Seed</strong></div>
+          <div class="stage-track" id="stageTrack" aria-label="Growth stages"><span class="active current">Seed · 1–2</span><span>Seedling · 3–4</span><span>Grown · 5–6</span></div>
+        </div>
+        <div class="soil-line" aria-hidden="true"></div>
+      </div>
+    </section>
+  </main>
+  <script src="app.js?v=8"></script>
+</body>
+</html>
